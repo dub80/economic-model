@@ -1,3 +1,5 @@
+CC=gcc
+
 .PHONY: build test
 
 all: clean build run
