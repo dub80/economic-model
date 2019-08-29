@@ -10,3 +10,6 @@ build:
 
 run:
 	./build/economic-model.out
+
+disassemble:
+	otool -tvV ./build/economic-model.out
