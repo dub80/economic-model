@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  all:
+  build:
     docker:
       - image: alpine:3.10
 
