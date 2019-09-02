@@ -1,15 +1,19 @@
 #ifndef PERSON
 #define PERSON
 
-struct Person {
+typedef struct {
   int person_id;
   char *name;
   int income;
-};
+} person;
 
-// struct Person *initialisePeople(int k);
-void raiseIncome(struct Person person, int percent);
-// void logPeople(struct Person people[]);
-void logPerson(struct Person person);
+
+void setupPopulation();
+person **getPopulation();
+int countPopulation();
+void clearPopulation();
+
+void raiseIncome(person p, int percent);
+void logPerson(person p);
 
 #endif /* PERSON */
