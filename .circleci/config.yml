@@ -16,9 +16,5 @@ jobs:
           command: make build
 
       - run:
-          name: Check memory leak
-          command: make check-leak
-
-      - run:
           name: Run tests
           command: make test
