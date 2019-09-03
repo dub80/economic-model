@@ -13,7 +13,10 @@
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
-      "environment": [],
+      "environment": [{
+        "name": "DATEMSK",
+        "value": "/Users/kunalmandalia/Documents/code/economic-model/config/timetemplate.txt"
+      }],
       "externalConsole": false,
       "MIMode": "lldb"
     }
