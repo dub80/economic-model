@@ -5,6 +5,7 @@
     "_malloc.h": "c",
     "string.h": "c",
     "time.h": "c",
-    "types.h": "c"
+    "types.h": "c",
+    "simulation.h": "c"
   }
 }

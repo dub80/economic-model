@@ -1,6 +1,6 @@
 #include <check.h>
 #include <stdio.h>
-#include "../src/actors/person.h"
+#include "../src/person.h"
 #include "../src/simulation.h"
 
 
@@ -26,7 +26,7 @@ START_TEST(simulation_age)
 {
   // arrange
   simulation *s = initialiseSimulation();
-
+  
   // act
   // assert
   fail_unless(s->age == 0, "simulation starts at age 0");
