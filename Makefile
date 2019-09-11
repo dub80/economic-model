@@ -8,7 +8,7 @@ clean:
 	rm -rf ./build/economic-model.out
 
 build:
-	gcc -o ./build/economic-model.out ./src/**.c
+	gcc -o ./build/economic-model.out ./src/*.c
 
 run:
 	./build/economic-model.out
