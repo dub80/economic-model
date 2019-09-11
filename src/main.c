@@ -2,9 +2,12 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
-#include "./actors/person.h"
+#include "./person.h"
+#include "./simulation.h"
 
 int main () {
+  simulation *s = initialiseSimulation();
+
   time_t current_time;
   char* c_time_string;
   
