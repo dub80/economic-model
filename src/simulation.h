@@ -2,7 +2,7 @@
 #define SIMULATION
 
 typedef struct {
-  int age;
+  int year;
 } simulation;
 
 simulation *initialiseSimulation();

@@ -4,34 +4,49 @@
 #include "../src/simulation.h"
 
 
-START_TEST(setup_population)
-{
-  // arrange
-  setupPopulation(150);
-  
-  // act
-  int populationCount = countPopulation();
-  person **people = getPopulation();
-
-  // assert
-  fail_unless(people[0]->income > 50, "unexpected income");
-  fail_unless(populationCount == 150, "incorrect no. of people setup");
-
-  // cleanup
-  clearPopulation();
-}
-END_TEST
-
 START_TEST(simulation_age)
 {
   // arrange
-  simulation *s = initialiseSimulation();
+  simulation *s = initialiseSimulation(2010);
   
   // act
   // assert
-  fail_unless(s->age == 0, "simulation starts at age 0");
+  fail_unless(s->year == 2010, "simulation starts at year 2010");
   simulationTick();
-  fail_unless(s->age == 1, "simulation ages with tick");
+  fail_unless(s->year == 2011, "simulation ages a year to 2011");
+
+  // cleanup
+  clearSimulation();
+}
+END_TEST
+
+START_TEST(person_getage)
+{
+  // arrange
+  person p = { 2010 };
+
+  // act
+  int age = getage(2050, &p);
+
+  // assert
+  fail_unless(age == 40, "getage returns correct age");
+}
+END_TEST
+
+START_TEST(simulation_person_aging)
+{
+  // arrange
+  simulation *s = initialiseSimulation(2015);
+  person p = { 2008 };
+
+  // act
+  simulationTick();
+
+  // assert
+  fail_unless(getage(s->year, &p) == 8, "person ages a year");
+
+  // cleanup
+  clearSimulation();
 }
 END_TEST
 
@@ -43,8 +58,9 @@ int main(void)
   int nf;
 
   suite_add_tcase(s1, tc1_1);
-  tcase_add_test(tc1_1, setup_population);
   tcase_add_test(tc1_1, simulation_age);
+  tcase_add_test(tc1_1, simulation_person_aging);
+  tcase_add_test(tc1_1, person_getage);
 
   srunner_run_all(sr, CK_ENV);
   nf = srunner_ntests_failed(sr);

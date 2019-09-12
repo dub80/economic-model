@@ -15,11 +15,7 @@ int main () {
   c_time_string = ctime(&current_time);
   printf("Economic model started on %s\n", c_time_string);
 
-  setupPopulation(100);
-  person **people = getPopulation();
-  logPerson(*people[0]);
-
-  free(people);
+  clearSimulation(s);
   printf("returning from main\n");
   return 0;
 }
