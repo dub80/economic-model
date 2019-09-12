@@ -1,7 +1,6 @@
 #include <check.h>
 #include <stdio.h>
-#include "../src/person.h"
-#include "../src/simulation.h"
+#include "../src/economic-model.h"
 
 
 START_TEST(simulation_age)

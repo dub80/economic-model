@@ -1,5 +1,5 @@
 #include "stdlib.h"
-#include "./simulation.h"
+#include "./economic-model.h"
 
 simulation *s;
 
