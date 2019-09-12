@@ -2,8 +2,7 @@
 #include <time.h>
 #include <string.h>
 #include <stdlib.h>
-#include "./person.h"
-#include "./simulation.h"
+#include "./economic-model.h"
 
 int main () {
   simulation *s = initialiseSimulation();

@@ -1,7 +1,6 @@
 #include <check.h>
 #include <stdio.h>
-#include "../src/person.h"
-#include "../src/simulation.h"
+#include "../src/economic-model.h"
 
 
 START_TEST(simulation_age)
@@ -20,13 +19,13 @@ START_TEST(simulation_age)
 }
 END_TEST
 
-START_TEST(person_getage)
+START_TEST(person_getAge)
 {
   // arrange
   person p = { 2010 };
 
   // act
-  int age = getage(2050, &p);
+  int age = getAge(2050, &p);
 
   // assert
   fail_unless(age == 40, "getage returns correct age");
@@ -43,7 +42,7 @@ START_TEST(simulation_person_aging)
   simulationTick();
 
   // assert
-  fail_unless(getage(s->year, &p) == 8, "person ages a year");
+  fail_unless(getAge(s->year, &p) == 8, "person ages a year");
 
   // cleanup
   clearSimulation();
@@ -60,7 +59,7 @@ int main(void)
   suite_add_tcase(s1, tc1_1);
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
-  tcase_add_test(tc1_1, person_getage);
+  tcase_add_test(tc1_1, person_getAge);
 
   srunner_run_all(sr, CK_ENV);
   nf = srunner_ntests_failed(sr);
