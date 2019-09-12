@@ -3,14 +3,14 @@
 
 simulation *s;
 
-simulation *initialiseSimulation() {
+simulation *initialiseSimulation(int year) {
   s = malloc(sizeof(simulation));
-  s->age = 0;
+  s->year = year;
   return s;
 }
 
 void simulationTick() {
-  s->age += 1;
+  s->year += 1;
 }
 
 simulation *getSimulation() {
