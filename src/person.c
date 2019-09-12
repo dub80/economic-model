@@ -3,6 +3,6 @@
 #include <string.h>
 #include "./economic-model.h"
 
-int getage(int year, person *p) {
+int getAge(int year, person *p) {
   return year - p->birth_year;
 }

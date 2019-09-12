@@ -16,6 +16,6 @@ typedef struct {
   int birth_year;
 } person;
 
-int getage(int year, person *p);
+int getAge(int year, person *p);
 
 #endif /* ECONOMIC_MODEL */
