@@ -11,7 +11,7 @@ START_TEST(simulation_age)
   // act
   // assert
   fail_unless(s->year == 2010, "simulation starts at year 2010");
-  simulationTick();
+  simulateYear();
   fail_unless(s->year == 2011, "simulation ages a year to 2011");
 
   // cleanup
@@ -35,14 +35,35 @@ END_TEST
 START_TEST(simulation_person_aging)
 {
   // arrange
-  simulation *s = initialiseSimulation(2015);
   person p = { 2008 };
+  simulation *s = initialiseSimulation(2015, p);
 
   // act
-  simulationTick();
+  simulateYear();
 
   // assert
   fail_unless(getAge(s->year, &p) == 8, "person ages a year");
+
+  // cleanup
+  clearSimulation();
+}
+END_TEST
+
+START_TEST(simulation_person_life_expectancy)
+{
+  // arrange
+  person p = { 2000 };
+  simulation *s = initialiseSimulation(2020, p);
+
+  // act
+  simulateYears(100);
+
+  // assert
+  person *agedPerson = getPerson();
+  fail_unless(s->year == 2120, "simulation progressed a decade");
+
+  printf("death year: %d\n", agedPerson->death_year);
+  fail_unless(agedPerson->death_year > -1, "person deceased");
 
   // cleanup
   clearSimulation();
@@ -60,6 +81,7 @@ int main(void)
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
   tcase_add_test(tc1_1, person_getAge);
+  tcase_add_test(tc1_1, simulation_person_life_expectancy);
 
   srunner_run_all(sr, CK_ENV);
   nf = srunner_ntests_failed(sr);
