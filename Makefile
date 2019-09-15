@@ -1,6 +1,7 @@
 CC=gcc
 
 .PHONY: build test leak
+TEST_SRC_FILES = $(filter-out src/main.c, $(wildcard src/*.c))
 
 all: clean build run
 
@@ -17,7 +18,7 @@ disassemble:
 	otool -tvV ./build/economic-model.out
 
 test:
-	gcc -Wall -o ./test/economic-model.out ./test/economic-model.c ./src/person.c ./src/simulation.c -lcheck -I ./test/
+	gcc -Wall -o ./test/economic-model.out ./test/economic-model.c $(TEST_SRC_FILES) -lcheck -I ./test/
 	./test/economic-model.out -v
 
 check-leak:
