@@ -24,3 +24,8 @@ test:
 check-leak:
 	gcc -ggdb -o ./test/economic-model-leak.out ./src/*.c -fsanitize=address -fno-omit-frame-pointer
 	./test/economic-model-leak.out
+
+scratch:
+	gcc -o ./build/scratch.out ./src/scratch.c
+	./build/scratch.out
+
