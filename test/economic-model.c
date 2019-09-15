@@ -6,7 +6,8 @@
 START_TEST(simulation_age)
 {
   // arrange
-  simulation *s = initialiseSimulation(2010);
+  person *p = makePerson(2000, -1);
+  simulation *s = initialiseSimulation(2010, p);
   
   // act
   // assert
@@ -22,27 +23,30 @@ END_TEST
 START_TEST(person_getAge)
 {
   // arrange
-  person p = { 2010 };
+  person *p = makePerson(2010, -1);
 
   // act
-  int age = getAge(2050, &p);
+  int age = getAge(2050, p);
 
   // assert
   fail_unless(age == 40, "getage returns correct age");
+
+  // cleanup
+  clearSimulation();
 }
 END_TEST
 
 START_TEST(simulation_person_aging)
 {
   // arrange
-  person p = { 2008 };
+  person *p = makePerson(2008, -1);
   simulation *s = initialiseSimulation(2015, p);
 
   // act
   simulateYear();
 
   // assert
-  fail_unless(getAge(s->year, &p) == 8, "person ages a year");
+  fail_unless(getAge(s->year, p) == 8, "person ages a year");
 
   // cleanup
   clearSimulation();
@@ -52,7 +56,7 @@ END_TEST
 START_TEST(simulation_person_life_expectancy)
 {
   // arrange
-  person p = { 2000 };
+  person *p = makePerson(2000, -1);
   simulation *s = initialiseSimulation(2020, p);
 
   // act
