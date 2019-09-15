@@ -1,31 +1,28 @@
 #include "stdlib.h"
 #include "./economic-model.h"
 
-simulation *s;
-person *p;
+simulation *_simulation;
+person *_person;
 
-simulation *initialiseSimulation(int year, person person) {
-  s = malloc(sizeof(simulation));
-  p = malloc(sizeof(person));
+simulation *initialiseSimulation(int year, person *person) {
+  _simulation = malloc(sizeof(simulation));
+  _simulation->year = year;
+  _person = person;
 
-  s->year = year;
-  p->birth_year = person.birth_year;
-  p->death_year = -1;
-
-  return s;
+  return _simulation;
 }
 
 simulation *getSimulation() {
-  return s;
+  return _simulation;
 }
 
 person *getPerson() {
-  return p;
+  return _person;
 }
 
 void simulateYear() {
-  s->year += 1;
-  personTick(s->year, p);
+  _simulation->year += 1;
+  personTick(_simulation->year, _person);
 }
 
 void simulateYears(int years) {
@@ -35,6 +32,6 @@ void simulateYears(int years) {
 }
 
 void clearSimulation() {
-  free(s);
-  free(p);
+  free(_simulation);
+  free(_person);
 }

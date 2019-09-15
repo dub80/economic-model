@@ -10,9 +10,8 @@ typedef struct {
   int death_year;
 } person;
 
-
 // simulation
-simulation *initialiseSimulation();
+simulation *initialiseSimulation(int year, person *person);
 simulation *getSimulation();
 person *getPerson();
 void simulateYear();
@@ -22,5 +21,6 @@ void clearSimulation();
 // person
 int getAge(int year, person *p);
 void personTick(int year, person *p);
+person *makePerson(int birthYear, int deathYear);
 
 #endif /* ECONOMIC_MODEL */

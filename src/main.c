@@ -5,7 +5,8 @@
 #include "./economic-model.h"
 
 int main () {
-  simulation *s = initialiseSimulation();
+  person *p = makePerson(2000, -1);
+  simulation *s = initialiseSimulation(2020, p);
 
   time_t current_time;
   char* c_time_string;
