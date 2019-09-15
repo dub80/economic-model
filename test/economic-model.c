@@ -1,7 +1,23 @@
 #include <check.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include "../src/economic-model.h"
 
+START_TEST(person_getAge)
+{
+  // arrange
+  person *p = makePerson(2010, -1);
+
+  // act
+  int age = getAge(2050, p);
+
+  // assert
+  fail_unless(age == 40, "getage returns correct age");
+
+  // cleanup
+  free(p);
+}
+END_TEST
 
 START_TEST(simulation_age)
 {
@@ -14,22 +30,6 @@ START_TEST(simulation_age)
   fail_unless(s->year == 2010, "simulation starts at year 2010");
   simulateYear();
   fail_unless(s->year == 2011, "simulation ages a year to 2011");
-
-  // cleanup
-  clearSimulation();
-}
-END_TEST
-
-START_TEST(person_getAge)
-{
-  // arrange
-  person *p = makePerson(2010, -1);
-
-  // act
-  int age = getAge(2050, p);
-
-  // assert
-  fail_unless(age == 40, "getage returns correct age");
 
   // cleanup
   clearSimulation();
@@ -74,6 +74,7 @@ START_TEST(simulation_person_life_expectancy)
 }
 END_TEST
 
+
 int main(void)
 {
   Suite *s1 = suite_create("Core");
@@ -82,9 +83,9 @@ int main(void)
   int nf;
 
   suite_add_tcase(s1, tc1_1);
+  tcase_add_test(tc1_1, person_getAge);
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
-  tcase_add_test(tc1_1, person_getAge);
   tcase_add_test(tc1_1, simulation_person_life_expectancy);
 
   srunner_run_all(sr, CK_ENV);

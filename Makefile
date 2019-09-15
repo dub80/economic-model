@@ -18,7 +18,7 @@ disassemble:
 	otool -tvV ./build/economic-model.out
 
 test:
-	gcc -v -Wall -o ./test/economic-model.out ./test/economic-model.c $(TEST_SRC_FILES) -lcheck -I ./test/
+	gcc -Wall -o ./test/economic-model.out ./test/economic-model.c $(TEST_SRC_FILES) -lcheck -I ./test/
 	./test/economic-model.out
 
 check-leak:
