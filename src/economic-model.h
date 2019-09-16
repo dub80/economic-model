@@ -11,7 +11,7 @@ typedef struct {
 } person;
 
 // simulation
-simulation *initialiseSimulation(int year, person *person);
+simulation *initialiseSimulation(int year, person **people);
 simulation *getSimulation();
 person *getPerson();
 void simulateYear();
@@ -22,5 +22,6 @@ void clearSimulation();
 int getAge(int year, person *p);
 void personTick(int year, person *p);
 person *makePerson(int birthYear, int deathYear);
+int countPeople(person **people);
 
 #endif /* ECONOMIC_MODEL */

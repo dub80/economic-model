@@ -1,13 +1,14 @@
 #include "stdlib.h"
+#include "stdio.h"
 #include "./economic-model.h"
 
 simulation *_simulation;
-person *_person;
+person **_people;
 
-simulation *initialiseSimulation(int year, person *person) {
+simulation *initialiseSimulation(int year, person **people) {
   _simulation = malloc(sizeof(simulation));
   _simulation->year = year;
-  _person = person;
+  _people = people;
 
   return _simulation;
 }
@@ -16,13 +17,16 @@ simulation *getSimulation() {
   return _simulation;
 }
 
-person *getPerson() {
-  return _person;
+person **getPeople() {
+  return _people;
 }
 
 void simulateYear() {
   _simulation->year += 1;
-  personTick(_simulation->year, _person);
+  int peopleCount = countPeople(_people);
+  for (int i=0; i<peopleCount; i++) {
+    personTick(_simulation->year, _people[i]);
+  }
 }
 
 void simulateYears(int years) {
@@ -32,6 +36,11 @@ void simulateYears(int years) {
 }
 
 void clearSimulation() {
-  free(_simulation);
-  free(_person);
+  if (_simulation != NULL) {
+    free(_simulation);
+  }
+
+  if (_people != NULL) {
+    free(_people);
+  }
 }

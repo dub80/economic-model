@@ -32,3 +32,11 @@ int healthCheck(int year, person *p) {
 void personTick(int year, person *p) {
   healthCheck(year, p);
 }
+
+int countPeople(person **people) {
+  int i = 0;
+  while (people[i] != NULL) {
+    i++;
+  }
+  return i;
+}

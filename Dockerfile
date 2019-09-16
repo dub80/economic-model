@@ -6,5 +6,3 @@ RUN apk add build-base \
 COPY . ./app
 
 WORKDIR /app
-
-ENTRYPOINT [ "make", "test" ]
