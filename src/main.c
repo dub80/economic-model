@@ -10,7 +10,7 @@ int main () {
   people[0] = p;
   people[1] = NULL;
 
-  simulation *s = initialiseSimulation(2020, p, people);
+  simulation *s = initialiseSimulation(2020, people);
 
   time_t current_time;
   char* c_time_string;

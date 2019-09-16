@@ -11,7 +11,7 @@ typedef struct {
 } person;
 
 // simulation
-simulation *initialiseSimulation(int year, person *individual, person **people);
+simulation *initialiseSimulation(int year, person **people);
 simulation *getSimulation();
 person *getPerson();
 void simulateYear();

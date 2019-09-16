@@ -3,13 +3,11 @@
 #include "./economic-model.h"
 
 simulation *_simulation;
-person *_person;
 person **_people;
 
-simulation *initialiseSimulation(int year, person *individual, person **people) {
+simulation *initialiseSimulation(int year, person **people) {
   _simulation = malloc(sizeof(simulation));
   _simulation->year = year;
-  _person = individual;
   _people = people;
 
   return _simulation;
@@ -19,8 +17,8 @@ simulation *getSimulation() {
   return _simulation;
 }
 
-person *getPerson() {
-  return _person;
+person **getPeople() {
+  return _people;
 }
 
 void simulateYear() {
@@ -40,10 +38,6 @@ void simulateYears(int years) {
 void clearSimulation() {
   if (_simulation != NULL) {
     free(_simulation);
-  }
-
-  if (_person != NULL) {
-    free(_person);
   }
 
   if (_people != NULL) {

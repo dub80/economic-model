@@ -19,10 +19,10 @@ disassemble:
 	otool -tvV ./build/economic-model.out
 
 test:
-	gcc -Wall -o ./test/economic-model.out ./test/economic-model.c $(TEST_SRC_FILES) -lcheck -I ./test/
-	./test/economic-model.out
+	gcc -Wall -o ./test/test.out ./test/test.c $(TEST_SRC_FILES) -lcheck -I ./test/
+	./test/test.out
 
-check-leak:
+leak:
 	gcc -ggdb -o ./test/economic-model-leak.out $(SRC_FILES) -fsanitize=address -fno-omit-frame-pointer
 	./test/economic-model-leak.out
 

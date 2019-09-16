@@ -26,7 +26,7 @@ START_TEST(simulation_age)
   person **people = malloc(2 * sizeof(person));
   people[0] = p;
   people[1] = NULL;
-  simulation *s = initialiseSimulation(2010, p, people);
+  simulation *s = initialiseSimulation(2010, people);
   
   // act
   // assert
@@ -46,7 +46,7 @@ START_TEST(simulation_person_aging)
   person **people = malloc(2 * sizeof(person));
   people[0] = p;
   people[1] = NULL;
-  simulation *s = initialiseSimulation(2015, p, people);
+  simulation *s = initialiseSimulation(2015, people);
 
   // act
   simulateYear();
@@ -59,47 +59,21 @@ START_TEST(simulation_person_aging)
 }
 END_TEST
 
-START_TEST(simulation_person_life_expectancy)
-{
-  // arrange
-  person *p = makePerson(2000, -1);
-  person **people = malloc(2 * sizeof(person));
-  people[0] = p;
-  people[1] = NULL;
-  simulation *s = initialiseSimulation(2020, p, people);
-
-  // act
-  simulateYears(100);
-
-  // assert
-  person *agedPerson = getPerson();
-  fail_unless(s->year == 2120, "simulation progressed a decade");
-  fail_unless(agedPerson->death_year > -1, "person deceased");
-
-  // cleanup
-  clearSimulation();
-}
-END_TEST
-
 START_TEST(simulation_people_life_expectancy)
 {
   // arrange
-
   person *p1 = makePerson(2010, -1);
-  person *p2 = makePerson(2010, -1);
+  person *p2 = makePerson(2006, -1);
   person **people = malloc(3 * sizeof(person));
   people[0] = p1;
   people[1] = p2;
   people[2] = NULL;
-
-  initialiseSimulation(2021, p1, people);
+  initialiseSimulation(2021, people);
 
   // act
   simulateYears(150);
 
   // assert
-  printf("data: %d\n", p1->death_year);
-
   fail_unless(p1->death_year > -1, "person p1 should be deceased");
   fail_unless(p2->death_year > -1, "person p2 should be deceased");
 
@@ -119,7 +93,6 @@ int main(void)
   tcase_add_test(tc1_1, person_getAge);
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
-  tcase_add_test(tc1_1, simulation_person_life_expectancy);
   tcase_add_test(tc1_1, simulation_people_life_expectancy);
 
   srunner_run_all(sr, CK_ENV);
