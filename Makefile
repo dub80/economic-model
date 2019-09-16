@@ -1,7 +1,8 @@
 CC=gcc
 
-.PHONY: build test leak
-TEST_SRC_FILES = $(filter-out src/main.c, $(wildcard src/*.c))
+.PHONY: build test leak temp
+SRC_FILES = $(wildcard src/*.c)
+TEST_SRC_FILES = $(filter-out src/main.c, $(SRC_FILES))
 
 all: clean build run
 
@@ -22,10 +23,10 @@ test:
 	./test/economic-model.out
 
 check-leak:
-	gcc -ggdb -o ./test/economic-model-leak.out ./src/*.c -fsanitize=address -fno-omit-frame-pointer
+	gcc -ggdb -o ./test/economic-model-leak.out $(SRC_FILES) -fsanitize=address -fno-omit-frame-pointer
 	./test/economic-model-leak.out
 
-scratch:
-	gcc -o ./build/scratch.out ./src/scratch.c
-	./build/scratch.out
+temp:
+	gcc -o ./build/temp.out ./temp/main.c
+	./build/temp.out
 
