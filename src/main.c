@@ -6,7 +6,11 @@
 
 int main () {
   person *p = makePerson(2000, -1);
-  simulation *s = initialiseSimulation(2020, p);
+  person **people = malloc(2 * sizeof(person));
+  people[0] = p;
+  people[1] = NULL;
+
+  simulation *s = initialiseSimulation(2020, p, people);
 
   time_t current_time;
   char* c_time_string;
