@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../src/economic-model.h"
 
+// person
 START_TEST(person_getAge)
 {
   // arrange
@@ -63,6 +64,34 @@ START_TEST(person_define_iq) {
 }
 END_TEST
 
+START_TEST(person_define_experience)
+{
+  // arrange
+  personality _personality = { 1, 2, 3, 4, 5 };
+  person *_person = makePerson(1987, -1, 115, &_personality);
+
+  experience education = { 2000, 5, EDUCATION, LOW };
+  experience professional = { 2001, 8, PROFESSIONAL_PRIMARY, LOW };
+  experience **history = malloc(3 * sizeof(experience));
+  history[0] = &education;
+  history[1] = &professional;
+  history[2] = NULL;
+
+  _person->experience = history;
+
+  // act
+  // assert
+  fail_unless(_person->experience[0]->category == EDUCATION, "category set correctly");
+  fail_unless(_person->experience[0]->year == 2000, "year set correctly");
+  fail_unless(_person->experience[1]->progress == 8, "progress set correctly");
+
+  // cleanup
+  free(history);
+  free(_person);
+}
+END_TEST
+
+// simulation
 START_TEST(simulation_age)
 {
   // arrange
@@ -142,6 +171,7 @@ int main(void)
   tcase_add_test(tc1_1, person_deceased_age);
   tcase_add_test(tc1_1, person_define_personality);
   tcase_add_test(tc1_1, person_define_iq);
+  tcase_add_test(tc1_1, person_define_experience);
 
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
