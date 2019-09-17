@@ -7,7 +7,7 @@ typedef struct {
 
 typedef struct {
   int openness;
-  int conscientousness;
+  int conscientiousness;
   int extraversion;
   int agreeableness;
   int neuroticism;

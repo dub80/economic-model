@@ -87,7 +87,7 @@ START_TEST(person_define_personality) {
 
   personality *_personality = malloc(sizeof(personality));
   _personality->openness = 2;
-  _personality->conscientousness = 3;
+  _personality->conscientiousness = 3;
   _personality->extraversion = 4;
   _personality->agreeableness = 1;
   _personality->neuroticism = 0;
