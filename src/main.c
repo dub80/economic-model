@@ -13,7 +13,7 @@ int main () {
   simulation *s = initialiseSimulation(2020, people);
 
   time_t current_time;
-  char* c_time_string;
+  char *c_time_string;
   
   current_time = time(NULL);
   c_time_string = ctime(&current_time);
