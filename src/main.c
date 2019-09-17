@@ -5,12 +5,13 @@
 #include "./economic-model.h"
 
 int main () {
-  person *p = makePerson(2000, -1, 100);
-  person **people = malloc(2 * sizeof(person));
-  people[0] = p;
-  people[1] = NULL;
+  personality _personality = { 3, 3, 3, 3, 3 };
+  person *_person = makePerson(2000, -1, 100, &_personality);
+  person **_people = malloc(2 * sizeof(person));
+  _people[0] = _person;
+  _people[1] = NULL;
 
-  simulation *s = initialiseSimulation(2020, people);
+  simulation *s = initialiseSimulation(2020, _people);
 
   time_t current_time;
   char *c_time_string;

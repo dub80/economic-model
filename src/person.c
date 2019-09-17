@@ -3,11 +3,12 @@
 #include <string.h>
 #include "./economic-model.h"
 
-person *makePerson(int birthYear, int deathYear, int iq) {
+person *makePerson(int birthYear, int deathYear, int iq, personality *_personality) {
   person *p = malloc(sizeof(person));
   p->birth_year = birthYear;
   p->death_year = deathYear;
   p->iq = iq;
+  p->personality = _personality;
   return p;
 }
 
