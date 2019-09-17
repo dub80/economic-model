@@ -34,7 +34,6 @@ END_TEST
 
 START_TEST(person_define_personality) {
   // arrange
-
   personality *_personality = malloc(sizeof(personality));
   _personality->openness = 2;
   _personality->conscientiousness = 3;
