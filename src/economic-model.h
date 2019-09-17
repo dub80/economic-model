@@ -6,8 +6,17 @@ typedef struct {
 } simulation;
 
 typedef struct {
+  int openness;
+  int conscientousness;
+  int extraversion;
+  int agreeableness;
+  int neuroticism;
+} personality;
+
+typedef struct {
   int birth_year;
   int death_year;
+  personality *personality;
 } person;
 
 // simulation
