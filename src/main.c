@@ -5,7 +5,7 @@
 #include "./economic-model.h"
 
 int main () {
-  person *p = makePerson(2000, -1);
+  person *p = makePerson(2000, -1, 100);
   person **people = malloc(2 * sizeof(person));
   people[0] = p;
   people[1] = NULL;

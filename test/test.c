@@ -6,7 +6,7 @@
 START_TEST(person_getAge)
 {
   // arrange
-  person *p = makePerson(2010, -1);
+  person *p = makePerson(2010, -1, 100);
 
   // act
   int age = getAge(2050, p);
@@ -21,7 +21,7 @@ END_TEST
 
 START_TEST(person_deceased_age) {
   // arrange
-  person *p = makePerson(1970, 2015);
+  person *p = makePerson(1970, 2015, 95);
   
   // act
   // assert
@@ -44,6 +44,7 @@ START_TEST(person_define_personality) {
   person *_person = malloc(sizeof(person));
   _person->birth_year = 2000;
   _person->death_year = -1;
+  _person->iq = 102;
   _person->personality = _personality;
 
   // act
@@ -57,10 +58,23 @@ START_TEST(person_define_personality) {
 }
 END_TEST
 
+START_TEST(person_define_iq) {
+  // arrange
+  person *_person = makePerson(1987, -1, 115);
+
+  // act
+  // assert
+  fail_unless(_person->iq  == 115, "iq set correctly");
+
+  // cleanup
+  free(_person);
+}
+END_TEST
+
 START_TEST(simulation_age)
 {
   // arrange
-  person *p = makePerson(2000, -1);
+  person *p = makePerson(2000, -1, 105);
   person **people = malloc(2 * sizeof(person));
   people[0] = p;
   people[1] = NULL;
@@ -80,7 +94,7 @@ END_TEST
 START_TEST(simulation_person_aging)
 {
   // arrange
-  person *p = makePerson(2008, -1);
+  person *p = makePerson(2008, -1, 130);
   person **people = malloc(2 * sizeof(person));
   people[0] = p;
   people[1] = NULL;
@@ -100,8 +114,8 @@ END_TEST
 START_TEST(simulation_people_life_expectancy)
 {
   // arrange
-  person *p1 = makePerson(2010, -1);
-  person *p2 = makePerson(2006, -1);
+  person *p1 = makePerson(2010, -1, 120);
+  person *p2 = makePerson(2006, -1, 97);
   person **people = malloc(3 * sizeof(person));
   people[0] = p1;
   people[1] = p2;
@@ -132,6 +146,7 @@ int main(void)
   tcase_add_test(tc1_1, person_getAge);
   tcase_add_test(tc1_1, person_deceased_age);
   tcase_add_test(tc1_1, person_define_personality);
+  tcase_add_test(tc1_1, person_define_iq);
 
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
