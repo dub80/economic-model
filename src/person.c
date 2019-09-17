@@ -11,6 +11,13 @@ person *makePerson(int birthYear, int deathYear) {
 }
 
 int getAge(int year, person *p) {
+  if (p == NULL) {
+    return -1;
+  }
+
+  if (p->death_year > -1) {
+    return (p->death_year - p->birth_year);
+  }
   return year - p->birth_year;
 }
 

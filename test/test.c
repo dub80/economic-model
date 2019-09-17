@@ -82,6 +82,19 @@ START_TEST(simulation_people_life_expectancy)
 }
 END_TEST
 
+START_TEST(person_deceased_age) {
+  // arrange
+  person *p = makePerson(1970, 2015);
+  
+  // act
+  // assert
+  fail_unless(getAge(2050, p) == 45, "person should stop aging once deceased");
+
+  // cleanup
+  free(p);
+}
+END_TEST
+
 int main(void)
 {
   Suite *s1 = suite_create("Core");
@@ -94,6 +107,7 @@ int main(void)
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
   tcase_add_test(tc1_1, simulation_people_life_expectancy);
+  tcase_add_test(tc1_1, person_deceased_age);
 
   srunner_run_all(sr, CK_ENV);
   nf = srunner_ntests_failed(sr);
