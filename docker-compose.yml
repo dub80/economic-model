@@ -4,4 +4,5 @@ services:
     build:
       context: '.'
       dockerfile: 'Dockerfile'
-    command: make test
+    command: |
+      sh -c "make clean && make build && make test"
