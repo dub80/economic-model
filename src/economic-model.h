@@ -31,7 +31,7 @@ void clearSimulation();
 // person
 int getAge(int year, person *p);
 void personTick(int year, person *p);
-person *makePerson(int birthYear, int deathYear, int iq);
+person *makePerson(int birthYear, int deathYear, int iq, personality *personality);
 int countPeople(person **people);
 
 #endif /* ECONOMIC_MODEL */

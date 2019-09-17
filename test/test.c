@@ -6,61 +6,53 @@
 START_TEST(person_getAge)
 {
   // arrange
-  person *p = makePerson(2010, -1, 100);
+  personality _personality = { 3, 3, 3, 3, 3 };
+  person *_person = makePerson(2010, -1, 100, &_personality);
 
   // act
-  int age = getAge(2050, p);
+  int age = getAge(2050, _person);
 
   // assert
   fail_unless(age == 40, "getage returns correct age");
 
   // cleanup
-  free(p);
+  free(_person);
 }
 END_TEST
 
 START_TEST(person_deceased_age) {
   // arrange
-  person *p = makePerson(1970, 2015, 95);
+  personality _personality = { 3, 3, 3, 3, 3 };
+  person *_person = makePerson(1970, 2015, 95, &_personality);
   
   // act
   // assert
-  fail_unless(getAge(2050, p) == 45, "person should stop aging once deceased");
+  fail_unless(getAge(2050, _person) == 45, "person should stop aging once deceased");
 
   // cleanup
-  free(p);
+  free(_person);
 }
 END_TEST
 
 START_TEST(person_define_personality) {
   // arrange
-  personality *_personality = malloc(sizeof(personality));
-  _personality->openness = 2;
-  _personality->conscientiousness = 3;
-  _personality->extraversion = 4;
-  _personality->agreeableness = 1;
-  _personality->neuroticism = 0;
-
-  person *_person = malloc(sizeof(person));
-  _person->birth_year = 2000;
-  _person->death_year = -1;
-  _person->iq = 102;
-  _person->personality = _personality;
+  personality _personality = { 1, 2, 3, 4, 5 };
+  person *_person = makePerson(2000, -1, 102, &_personality);
 
   // act
   // assert
-  fail_unless(_person->personality->agreeableness  == 1, "agreeableness set correctly");
-  fail_unless(_person->personality->openness  == 2, "openness set correctly");
+  fail_unless(_person->personality->agreeableness  == 4, "agreeableness set correctly");
+  fail_unless(_person->personality->openness  == 1, "openness set correctly");
 
   // cleanup
-  free(_personality);
   free(_person);
 }
 END_TEST
 
 START_TEST(person_define_iq) {
   // arrange
-  person *_person = makePerson(1987, -1, 115);
+  personality _personality = { 1, 2, 3, 4, 5 };
+  person *_person = makePerson(1987, -1, 115, &_personality);
 
   // act
   // assert
@@ -74,9 +66,10 @@ END_TEST
 START_TEST(simulation_age)
 {
   // arrange
-  person *p = makePerson(2000, -1, 105);
+  personality _personality = { 1, 2, 3, 4, 5 };
+  person *_person = makePerson(2000, -1, 105, &_personality);
   person **people = malloc(2 * sizeof(person));
-  people[0] = p;
+  people[0] = _person;
   people[1] = NULL;
   simulation *s = initialiseSimulation(2010, people);
   
@@ -94,17 +87,18 @@ END_TEST
 START_TEST(simulation_person_aging)
 {
   // arrange
-  person *p = makePerson(2008, -1, 130);
-  person **people = malloc(2 * sizeof(person));
-  people[0] = p;
-  people[1] = NULL;
-  simulation *s = initialiseSimulation(2015, people);
+  personality _personality = { 1, 2, 3, 4, 5 };
+  person *_person = makePerson(2008, -1, 130, &_personality);
+  person **_people = malloc(2 * sizeof(person));
+  _people[0] = _person;
+  _people[1] = NULL;
+  simulation *s = initialiseSimulation(2015, _people);
 
   // act
   simulateYear();
 
   // assert
-  fail_unless(getAge(s->year, p) == 8, "person ages a year");
+  fail_unless(getAge(s->year, _person) == 8, "person ages a year");
 
   // cleanup
   clearSimulation();
@@ -114,20 +108,21 @@ END_TEST
 START_TEST(simulation_people_life_expectancy)
 {
   // arrange
-  person *p1 = makePerson(2010, -1, 120);
-  person *p2 = makePerson(2006, -1, 97);
-  person **people = malloc(3 * sizeof(person));
-  people[0] = p1;
-  people[1] = p2;
-  people[2] = NULL;
-  initialiseSimulation(2021, people);
+  personality _personality = { 1, 2, 3, 4, 5 };
+  person *_person1 = makePerson(2010, -1, 120, &_personality);
+  person *_person2 = makePerson(2006, -1, 97, &_personality);
+  person **_people = malloc(3 * sizeof(person));
+  _people[0] = _person1;
+  _people[1] = _person2;
+  _people[2] = NULL;
+  initialiseSimulation(2021, _people);
 
   // act
   simulateYears(150);
 
   // assert
-  fail_unless(p1->death_year > -1, "person p1 should be deceased");
-  fail_unless(p2->death_year > -1, "person p2 should be deceased");
+  fail_unless(_person1->death_year > -1, "person p1 should be deceased");
+  fail_unless(_person2->death_year > -1, "person p2 should be deceased");
 
   // cleanup
   clearSimulation();
