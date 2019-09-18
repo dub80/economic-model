@@ -13,7 +13,7 @@ experience_option *getNextOpportunity(int year, person *_person) {
     // { year, EDUCATION, LOW };
     option->category = EDUCATION;
     option->level = LOW;
+    return option;
   }
-  return option;
-  // return NULL;
+  return NULL;
 }
