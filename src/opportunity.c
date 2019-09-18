@@ -10,7 +10,6 @@ experience_option *getNextOpportunity(int year, person *_person) {
   option->year = year;
 
   if (_person->experience == NULL) {
-    // { year, EDUCATION, LOW };
     option->category = EDUCATION;
     option->level = LOW;
     return option;
