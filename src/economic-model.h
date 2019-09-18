@@ -41,6 +41,12 @@ typedef struct {
   experience **experience;
 } person;
 
+typedef struct {
+  int year;
+  experience_category category;
+  experience_level level;
+} experience_option;
+
 // simulation
 simulation *initialiseSimulation(int year, person **people);
 simulation *getSimulation();
@@ -54,5 +60,8 @@ int getAge(int year, person *p);
 void personTick(int year, person *p);
 person *makePerson(int birthYear, int deathYear, int iq, personality *personality);
 int countPeople(person **people);
+
+// opportunity
+experience_option *getNextOpportunity(int year, person *p);
 
 #endif /* ECONOMIC_MODEL */
