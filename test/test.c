@@ -91,6 +91,27 @@ START_TEST(person_define_experience)
 }
 END_TEST
 
+// opportunity
+START_TEST(opportunity_getNextOpportunity)
+{
+  // arrange
+  personality _personality = { 3, 3, 3, 3, 3 };
+  person *_person = makePerson(2000, -1, 110, &_personality);
+  _person->experience = NULL;
+
+  // act
+  experience_option *_option = getNextOpportunity(2020, _person);
+  
+  // assert
+  fail_unless(_option->category == EDUCATION, "default experience category should be EDUCATION");
+  fail_unless(_option->level == LOW, "default experience level should be LOW");
+
+  // cleanup
+  free(_person);
+  free(_option);
+}
+END_TEST
+
 // simulation
 START_TEST(simulation_age)
 {
@@ -172,6 +193,8 @@ int main(void)
   tcase_add_test(tc1_1, person_define_personality);
   tcase_add_test(tc1_1, person_define_iq);
   tcase_add_test(tc1_1, person_define_experience);
+
+  tcase_add_test(tc1_1, opportunity_getNextOpportunity);
 
   tcase_add_test(tc1_1, simulation_age);
   tcase_add_test(tc1_1, simulation_person_aging);
