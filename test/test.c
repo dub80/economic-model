@@ -1,6 +1,7 @@
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../src/economic-model.h"
 
 // person
@@ -200,6 +201,7 @@ END_TEST
 
 int main(void)
 {
+  srand(time(NULL));
   Suite *s1 = suite_create("Core");
   TCase *tc1_1 = tcase_create("Core");
   SRunner *sr = srunner_create(s1);

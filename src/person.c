@@ -58,6 +58,6 @@ int countPeople(person **people) {
  * the past years but this year the intensity drops. Yearly attrition.
  */
 int getGrowthFromExperience(experience_option *option, person *p) {
-  int r = arc4random_uniform(10) + 1;
+  int r = rand() % 100;
   return r;
 }

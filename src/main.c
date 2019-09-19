@@ -1,10 +1,12 @@
-#include <stdio.h>
-#include <time.h>
-#include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <time.h>
 #include "./economic-model.h"
 
 int main () {
+  srand(time(NULL));
+
   personality _personality = { 3, 3, 3, 3, 3 };
   person *_person = makePerson(2000, -1, 100, &_personality);
   person **_people = malloc(2 * sizeof(person));
