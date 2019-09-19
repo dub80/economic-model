@@ -28,7 +28,7 @@ typedef enum {
 
 typedef struct {
   int year;
-  int progress;
+  int growth;
   experience_category category;
   experience_level level;
 } experience;
@@ -60,6 +60,7 @@ int getAge(int year, person *p);
 void personTick(int year, person *p);
 person *makePerson(int birthYear, int deathYear, int iq, personality *personality);
 int countPeople(person **people);
+int getGrowthFromExperience(experience_option *option, person *p);
 
 // opportunity
 experience_option *getNextOpportunity(int year, person *p);

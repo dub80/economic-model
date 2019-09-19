@@ -49,3 +49,9 @@ int countPeople(person **people) {
   }
   return i;
 }
+
+// from 1 to 10
+int getGrowthFromExperience(experience_option *option, person *p) {
+  int r = arc4random_uniform(10) + 1;
+  return r;
+}

@@ -6,6 +6,7 @@
     "string.h": "c",
     "time.h": "c",
     "types.h": "c",
-    "simulation.h": "c"
+    "simulation.h": "c",
+    "math.h": "c"
   }
 }
