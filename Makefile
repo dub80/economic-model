@@ -24,7 +24,7 @@ disassemble:
 
 test:
 	printf '%s\n' "> test:"
-	$(CC) -Wall -o ./test/test.out ./test/test.c $(TEST_SRC_FILES) -lcheck -I ./test/ $(LDFLAGS)
+	$(CC) -Wall -o ./test/test.out ./test/test.c $(TEST_SRC_FILES) $(LDFLAGS) -lcheck -I ./test/
 	./test/test.out
 
 leak:
