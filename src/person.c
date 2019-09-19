@@ -50,7 +50,13 @@ int countPeople(person **people) {
   return i;
 }
 
-// from 1 to 10
+/**
+ * TODO: growth should be logarithmic - easy to grow early when
+ * complexity is low and harder thereafter.
+ * 
+ * Growth may even be negative e.g. starting a high level of experience over
+ * the past years but this year the intensity drops. Yearly attrition.
+ */
 int getGrowthFromExperience(experience_option *option, person *p) {
   int r = arc4random_uniform(10) + 1;
   return r;
