@@ -1,8 +1,10 @@
 CC=gcc
-
-.PHONY: build test leak temp
+CFLAGS=-I/usr/include/gsl
+LDFLAGS=-lgsl -lgslcblas -lm
+CC=gcc
 SRC_FILES = $(wildcard src/*.c)
 TEST_SRC_FILES = $(filter-out src/main.c, $(SRC_FILES))
+.PHONY: build test leak temp
 
 all: clean build run
 
@@ -11,7 +13,7 @@ clean:
 
 build:
 	printf '%s\n' "> build:"
-	gcc -o ./build/economic-model.out ./src/*.c
+	$(CC) -Wall -o ./build/economic-model.out ./src/*.c $(LDFLAGS)
 
 run:
 	printf '%s\n' "> run:"
@@ -22,14 +24,13 @@ disassemble:
 
 test:
 	printf '%s\n' "> test:"
-	gcc -Wall -o ./test/test.out ./test/test.c $(TEST_SRC_FILES) -lcheck -I ./test/
+	$(CC) -Wall -o ./test/test.out ./test/test.c $(TEST_SRC_FILES) $(LDFLAGS) -lcheck -I ./test/
 	./test/test.out
 
 leak:
-	gcc -ggdb -o ./test/economic-model-leak.out $(SRC_FILES) -fsanitize=address -fno-omit-frame-pointer
+	$(CC) -Wall -ggdb -o ./test/economic-model-leak.out $(SRC_FILES) -fsanitize=address -fno-omit-frame-pointer $(LDFLAGS)
 	./test/economic-model-leak.out
 
 temp:
-	gcc -o ./build/temp.out ./temp/main.c
+	$(CC) -Wall -o ./build/temp.out ./temp/main.c $(LDFLAGS)
 	./build/temp.out
-

@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
+#include <gsl/gsl_randist.h>
 #include "./economic-model.h"
 
 person *makePerson(int birthYear, int deathYear, int iq, personality *_personality) {
@@ -48,4 +50,17 @@ int countPeople(person **people) {
     i++;
   }
   return i;
+}
+
+/**
+ * TODO: growth should be logarithmic - easy to grow early when
+ * complexity is low and harder thereafter.
+ * 
+ * Growth may even be negative e.g. starting a high level of experience over
+ * the past years but this year the intensity drops. Yearly attrition.
+ */
+int getGrowthFromExperience(experience_option *option, person *p) {
+  gsl_rng *r = gsl_rng_alloc(gsl_rng_mt19937);
+  double v = gsl_ran_gaussian(r, 1.0);
+  return floor(100 * v);
 }

@@ -1,6 +1,7 @@
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../src/economic-model.h"
 
 // person
@@ -83,10 +84,28 @@ START_TEST(person_define_experience)
   // assert
   fail_unless(_person->experience[0]->category == EDUCATION, "category set correctly");
   fail_unless(_person->experience[0]->year == 2000, "year set correctly");
-  fail_unless(_person->experience[1]->progress == 8, "progress set correctly");
+  fail_unless(_person->experience[1]->growth == 8, "progress set correctly");
 
   // cleanup
   free(history);
+  free(_person);
+}
+END_TEST
+
+START_TEST(person_get_experience_value)
+{
+  // arrange
+  personality _personality = { 3, 3, 3, 3, 3 };
+  person *_person = makePerson(2000, -1, 100, &_personality);
+  experience_option _option = { 2001, EDUCATION, LOW };
+
+  // act
+  int growth = getGrowthFromExperience(&_option, _person);
+
+  // assert
+  fail_unless(growth >= 1, "minimum of 1");
+
+  // cleanup
   free(_person);
 }
 END_TEST
@@ -179,8 +198,10 @@ START_TEST(simulation_people_life_expectancy)
 }
 END_TEST
 
+
 int main(void)
 {
+  srand(time(NULL));
   Suite *s1 = suite_create("Core");
   TCase *tc1_1 = tcase_create("Core");
   SRunner *sr = srunner_create(s1);
@@ -193,6 +214,7 @@ int main(void)
   tcase_add_test(tc1_1, person_define_personality);
   tcase_add_test(tc1_1, person_define_iq);
   tcase_add_test(tc1_1, person_define_experience);
+  tcase_add_test(tc1_1, person_get_experience_value);
 
   tcase_add_test(tc1_1, opportunity_getNextOpportunity);
 
