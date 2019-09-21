@@ -6,6 +6,9 @@
       "type": "shell",
       "command": "gcc",
       "args": [
+        "-lgsl",
+        "-lgslcblas",
+        "-lm",
         "-g",
         "./src/*.c",
         "-o",
