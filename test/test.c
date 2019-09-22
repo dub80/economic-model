@@ -1,8 +1,8 @@
+#include "../src/economic-model.h"
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../src/economic-model.h"
 
 // person
 START_TEST(person_getAge)
@@ -30,7 +30,8 @@ START_TEST(person_deceased_age)
 
   // act
   // assert
-  fail_unless(getAge(2050, _person) == 45, "person should stop aging once deceased");
+  fail_unless(getAge(2050, _person) == 45,
+              "person should stop aging once deceased");
 
   // cleanup
   free(_person);
@@ -45,7 +46,8 @@ START_TEST(person_define_personality)
 
   // act
   // assert
-  fail_unless(_person->personality->agreeableness == 4, "agreeableness set correctly");
+  fail_unless(_person->personality->agreeableness == 4,
+              "agreeableness set correctly");
   fail_unless(_person->personality->openness == 1, "openness set correctly");
 
   // cleanup
@@ -85,7 +87,8 @@ START_TEST(person_define_experience)
 
   // act
   // assert
-  fail_unless(_person->experience[0]->category == EDUCATION, "category set correctly");
+  fail_unless(_person->experience[0]->category == EDUCATION,
+              "category set correctly");
   fail_unless(_person->experience[0]->year == 2000, "year set correctly");
   fail_unless(_person->experience[1]->growth == 8, "progress set correctly");
 
@@ -104,7 +107,6 @@ START_TEST(person_get_experience_growth)
 
   // act
   int growth = getGrowthFromExperience(&_option, _person);
-  printf("%d\n", growth);
 
   // assert
   fail_unless(growth >= 1, "minimum of 1");
@@ -126,7 +128,8 @@ START_TEST(opportunity_get_next_opportunity)
   experience_option *_option = getNextOpportunity(2020, _person);
 
   // assert
-  fail_unless(_option->category == EDUCATION, "default experience category should be EDUCATION");
+  fail_unless(_option->category == EDUCATION,
+              "default experience category should be EDUCATION");
   fail_unless(_option->level == LOW, "default experience level should be LOW");
 
   // cleanup

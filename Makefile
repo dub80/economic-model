@@ -31,6 +31,9 @@ leak:
 	$(CC) -Wall -ggdb -o ./test/economic-model-leak.out $(SRC_FILES) -fsanitize=address -fno-omit-frame-pointer $(LDFLAGS)
 	./test/economic-model-leak.out
 
+check-leak:
+	valgrind --leak-check=full --show-leak-kinds=all ./build/economic-model.out
+
 temp:
 	$(CC) -Wall -o ./build/temp.out ./temp/main.c $(LDFLAGS)
 	./build/temp.out
