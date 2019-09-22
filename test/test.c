@@ -109,7 +109,7 @@ START_TEST(person_get_experience_growth)
   int growth = getGrowthFromExperience(&_option, _person);
 
   // assert
-  fail_unless(growth >= 1, "minimum of 1");
+  fail_unless(abs(growth) < 50, "should be within a reasonable range");
 
   // cleanup
   free(_person);
