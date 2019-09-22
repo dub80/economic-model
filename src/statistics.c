@@ -1,5 +1,4 @@
 #include <gsl/gsl_randist.h>
-#include <stdio.h>
 #include <time.h>
 
 gsl_rng *r;
@@ -16,8 +15,6 @@ double denormalise(double standardNormalValue, double mean, double stddev) {
 }
 
 double getRandomGaussian(double mean, double stddev, double *min, double *max) {
-  printf("getRandomGaussian invoked");
-
   double v = gsl_ran_gaussian(r, 1.0);
   double d = denormalise(v, mean, stddev);
 
