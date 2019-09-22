@@ -65,4 +65,9 @@ int getGrowthFromExperience(experience_option *option, person *p);
 // opportunity
 experience_option *getNextOpportunity(int year, person *p);
 
+// statistical helpers
+void initialiseStatistics();
+double getRandomGaussian(double mean, double stddev, double *min, double *max);
+void cleanupStatistics();
+
 #endif /* ECONOMIC_MODEL */
