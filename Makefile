@@ -12,18 +12,15 @@ clean:
 	rm -rf ./build/economic-model.out
 
 build:
-	printf '%s\n' "> build:"
-	$(CC) -Wall -o ./build/economic-model.out ./src/*.c $(LDFLAGS)
+	$(CC) -Wall -o ./build/economic-model.out $(SRC_FILES) $(LDFLAGS)
 
 run:
-	printf '%s\n' "> run:"
 	./build/economic-model.out
 
 disassemble:
 	otool -tvV ./build/economic-model.out
 
 test:
-	printf '%s\n' "> test:"
 	$(CC) -Wall -o ./test/test.out ./test/test.c $(TEST_SRC_FILES) $(LDFLAGS) -lcheck -I ./test/
 	./test/test.out
 
