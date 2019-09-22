@@ -60,7 +60,6 @@ int countPeople(person **people) {
  * the past years but this year the intensity drops. Yearly attrition.
  */
 int getGrowthFromExperience(experience_option *option, person *p) {
-  gsl_rng *r = gsl_rng_alloc(gsl_rng_mt19937);
-  double v = gsl_ran_gaussian(r, 1.0);
-  return floor(100 * v);
+  double r = getRandomGaussian(5, 2, NULL, NULL);
+  return round(r);
 }
