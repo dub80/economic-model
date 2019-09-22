@@ -20,11 +20,7 @@ typedef enum {
   PROFESSIONAL_TERTIARY
 } experience_category;
 
-typedef enum {
-  LOW,
-  MEDIUM,
-  HIGH
-} experience_level;
+typedef enum { LOW, MEDIUM, HIGH } experience_level;
 
 typedef struct {
   int year;
@@ -58,7 +54,8 @@ void clearSimulation();
 // person
 int getAge(int year, person *p);
 void personTick(int year, person *p);
-person *makePerson(int birthYear, int deathYear, int iq, personality *personality);
+person *makePerson(int birthYear, int deathYear, int iq,
+                   personality *personality);
 int countPeople(person **people);
 int getGrowthFromExperience(experience_option *option, person *p);
 

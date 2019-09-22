@@ -1,11 +1,12 @@
+#include "./economic-model.h"
+#include <gsl/gsl_randist.h>
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
-#include <gsl/gsl_randist.h>
-#include "./economic-model.h"
 
-person *makePerson(int birthYear, int deathYear, int iq, personality *_personality) {
+person *makePerson(int birthYear, int deathYear, int iq,
+                   personality *_personality) {
   person *p = malloc(sizeof(person));
   p->birth_year = birthYear;
   p->death_year = deathYear;
@@ -40,9 +41,7 @@ int healthCheck(int year, person *p) {
   return -1;
 }
 
-void personTick(int year, person *p) {
-  healthCheck(year, p);
-}
+void personTick(int year, person *p) { healthCheck(year, p); }
 
 int countPeople(person **people) {
   int i = 0;
@@ -55,7 +54,7 @@ int countPeople(person **people) {
 /**
  * TODO: growth should be logarithmic - easy to grow early when
  * complexity is low and harder thereafter.
- * 
+ *
  * Growth may even be negative e.g. starting a high level of experience over
  * the past years but this year the intensity drops. Yearly attrition.
  */

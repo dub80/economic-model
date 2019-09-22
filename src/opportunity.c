@@ -1,5 +1,5 @@
-#include <stdlib.h>
 #include "./economic-model.h"
+#include <stdlib.h>
 
 /**
  * based on a persons existing experience

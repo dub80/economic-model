@@ -1,12 +1,11 @@
+#include "../src/economic-model.h"
 #include <check.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "../src/economic-model.h"
 
 // person
-START_TEST(person_getAge)
-{
+START_TEST(person_getAge) {
   // arrange
   personality _personality = {3, 3, 3, 3, 3};
   person *_person = makePerson(2010, -1, 100, &_personality);
@@ -22,30 +21,30 @@ START_TEST(person_getAge)
 }
 END_TEST
 
-START_TEST(person_deceased_age)
-{
+START_TEST(person_deceased_age) {
   // arrange
   personality _personality = {3, 3, 3, 3, 3};
   person *_person = makePerson(1970, 2015, 95, &_personality);
 
   // act
   // assert
-  fail_unless(getAge(2050, _person) == 45, "person should stop aging once deceased");
+  fail_unless(getAge(2050, _person) == 45,
+              "person should stop aging once deceased");
 
   // cleanup
   free(_person);
 }
 END_TEST
 
-START_TEST(person_define_personality)
-{
+START_TEST(person_define_personality) {
   // arrange
   personality _personality = {1, 2, 3, 4, 5};
   person *_person = makePerson(2000, -1, 102, &_personality);
 
   // act
   // assert
-  fail_unless(_person->personality->agreeableness == 4, "agreeableness set correctly");
+  fail_unless(_person->personality->agreeableness == 4,
+              "agreeableness set correctly");
   fail_unless(_person->personality->openness == 1, "openness set correctly");
 
   // cleanup
@@ -53,8 +52,7 @@ START_TEST(person_define_personality)
 }
 END_TEST
 
-START_TEST(person_define_iq)
-{
+START_TEST(person_define_iq) {
   // arrange
   personality _personality = {1, 2, 3, 4, 5};
   person *_person = makePerson(1987, -1, 115, &_personality);
@@ -68,8 +66,7 @@ START_TEST(person_define_iq)
 }
 END_TEST
 
-START_TEST(person_define_experience)
-{
+START_TEST(person_define_experience) {
   // arrange
   personality _personality = {1, 2, 3, 4, 5};
   person *_person = makePerson(1987, -1, 115, &_personality);
@@ -85,7 +82,8 @@ START_TEST(person_define_experience)
 
   // act
   // assert
-  fail_unless(_person->experience[0]->category == EDUCATION, "category set correctly");
+  fail_unless(_person->experience[0]->category == EDUCATION,
+              "category set correctly");
   fail_unless(_person->experience[0]->year == 2000, "year set correctly");
   fail_unless(_person->experience[1]->growth == 8, "progress set correctly");
 
@@ -95,8 +93,7 @@ START_TEST(person_define_experience)
 }
 END_TEST
 
-START_TEST(person_get_experience_growth)
-{
+START_TEST(person_get_experience_growth) {
   // arrange
   personality _personality = {3, 3, 3, 3, 3};
   person *_person = makePerson(2000, -1, 100, &_personality);
@@ -115,8 +112,7 @@ START_TEST(person_get_experience_growth)
 END_TEST
 
 // opportunity
-START_TEST(opportunity_get_next_opportunity)
-{
+START_TEST(opportunity_get_next_opportunity) {
   // arrange
   personality _personality = {3, 3, 3, 3, 3};
   person *_person = makePerson(2000, -1, 110, &_personality);
@@ -126,7 +122,8 @@ START_TEST(opportunity_get_next_opportunity)
   experience_option *_option = getNextOpportunity(2020, _person);
 
   // assert
-  fail_unless(_option->category == EDUCATION, "default experience category should be EDUCATION");
+  fail_unless(_option->category == EDUCATION,
+              "default experience category should be EDUCATION");
   fail_unless(_option->level == LOW, "default experience level should be LOW");
 
   // cleanup
@@ -136,8 +133,7 @@ START_TEST(opportunity_get_next_opportunity)
 END_TEST
 
 // simulation
-START_TEST(simulation_age)
-{
+START_TEST(simulation_age) {
   // arrange
   personality _personality = {1, 2, 3, 4, 5};
   person *_person = makePerson(2000, -1, 105, &_personality);
@@ -157,8 +153,7 @@ START_TEST(simulation_age)
 }
 END_TEST
 
-START_TEST(simulation_person_aging)
-{
+START_TEST(simulation_person_aging) {
   // arrange
   personality _personality = {1, 2, 3, 4, 5};
   person *_person = makePerson(2008, -1, 130, &_personality);
@@ -178,8 +173,7 @@ START_TEST(simulation_person_aging)
 }
 END_TEST
 
-START_TEST(simulation_people_life_expectancy)
-{
+START_TEST(simulation_people_life_expectancy) {
   // arrange
   personality _personality = {1, 2, 3, 4, 5};
   person *_person1 = makePerson(2010, -1, 120, &_personality);
@@ -202,8 +196,7 @@ START_TEST(simulation_people_life_expectancy)
 }
 END_TEST
 
-START_TEST(statistics_get_random_gaussian)
-{
+START_TEST(statistics_get_random_gaussian) {
   // arrange
   // min value set unnaturally high to trigger test case
   double min = 100.0;
@@ -216,8 +209,7 @@ START_TEST(statistics_get_random_gaussian)
 }
 END_TEST
 
-int main(void)
-{
+int main(void) {
   Suite *s1 = suite_create("Core");
   TCase *tc1_1 = tcase_create("Core");
   SRunner *sr = srunner_create(s1);
