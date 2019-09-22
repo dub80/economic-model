@@ -9,11 +9,15 @@ jobs:
 
       - run:
           name: Install deps
-          command: apk add build-base && apk add check-dev && apk add gsl-dev
+          command: apk add build-base && apk add check-dev && apk add gsl-dev && apk add valgrind
 
       - run:
           name: Build
           command: make build
+
+      - run:
+          name: Check memory leak
+          command: make check-leak
 
       - run:
           name: Run tests
