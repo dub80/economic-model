@@ -6,7 +6,8 @@
 #include <string.h>
 
 person *makePerson(int birthYear, int deathYear, int iq,
-                   personality *_personality) {
+                   personality *_personality)
+{
   person *p = malloc(sizeof(person));
   p->birth_year = birthYear;
   p->death_year = deathYear;
@@ -15,25 +16,31 @@ person *makePerson(int birthYear, int deathYear, int iq,
   return p;
 }
 
-int getAge(int year, person *p) {
-  if (p == NULL) {
+int getAge(int year, person *p)
+{
+  if (p == NULL)
+  {
     return -1;
   }
 
-  if (p->death_year > -1) {
+  if (p->death_year > -1)
+  {
     return (p->death_year - p->birth_year);
   }
   return year - p->birth_year;
 }
 
-int healthCheck(int year, person *p) {
-  if (p->death_year != -1) {
+int healthCheck(int year, person *p)
+{
+  if (p->death_year != -1)
+  {
     return p->death_year;
   }
 
   int age = getAge(year, p);
 
-  if (age >= 100) {
+  if (age >= 100)
+  {
     p->death_year = year;
     return year;
   }
@@ -43,9 +50,11 @@ int healthCheck(int year, person *p) {
 
 void personTick(int year, person *p) { healthCheck(year, p); }
 
-int countPeople(person **people) {
+int countPeople(person **people)
+{
   int i = 0;
-  while (people[i] != NULL) {
+  while (people[i] != NULL)
+  {
     i++;
   }
   return i;
@@ -58,7 +67,8 @@ int countPeople(person **people) {
  * Growth may even be negative e.g. starting a high level of experience over
  * the past years but this year the intensity drops. Yearly attrition.
  */
-int getGrowthFromExperience(experience_option *option, person *p) {
+int getGrowthFromExperience(experience_option *option, person *p)
+{
   double r = getRandomGaussian(5, 2, NULL, NULL);
   return round(r);
 }

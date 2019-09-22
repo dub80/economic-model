@@ -4,7 +4,8 @@
 #include <string.h>
 #include <time.h>
 
-int main() {
+int main()
+{
   srand(time(NULL));
 
   personality _personality = {3, 3, 3, 3, 3};
